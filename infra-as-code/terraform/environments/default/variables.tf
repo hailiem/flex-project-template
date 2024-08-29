@@ -60,56 +60,8 @@ variable "TWILIO_FLEX_WORKSPACE_SID" {
   }
 }
 
-# FEATURE: schedule-manager
 
-variable "SCHEDULE_MANAGER_DOMAIN" {
-  type        = string
-  description = "schedule manager domain"
-  validation {
-    condition     = length(var.SCHEDULE_MANAGER_DOMAIN) > 17 && substr(var.SCHEDULE_MANAGER_DOMAIN, 0, 17) == "schedule-manager-"
-    error_message = "SCHEDULE_MANAGER_DOMAIN expected to start with \"schedule-manager-\"."
-  }
-}
 
-variable "SCHEDULE_MANAGER_SID" {
-  type        = string
-  description = "schedule manager sid"
-  validation {
-    condition     = length(var.SCHEDULE_MANAGER_SID) > 2 && substr(var.SCHEDULE_MANAGER_SID, 0, 2) == "ZS"
-    error_message = "SCHEDULE_MANAGER_SID expected to start with \"ZS\"."
-  }
-}
-
-variable "SCHEDULE_MANAGER_ENV_SID" {
-  type        = string
-  description = "schedule manager env sid"
-  validation {
-    condition     = length(var.SCHEDULE_MANAGER_ENV_SID) > 2 && substr(var.SCHEDULE_MANAGER_ENV_SID, 0, 2) == "ZE"
-    error_message = "SCHEDULE_MANAGER_ENV_SID expected to start with \"ZE\"."
-  }
-}
-
-variable "SCHEDULE_MANAGER_CHECK_FUNCTION_SID" {
-  type        = string
-  description = "check schedule function sid"
-  validation {
-    condition     = length(var.SCHEDULE_MANAGER_CHECK_FUNCTION_SID) > 2 && substr(var.SCHEDULE_MANAGER_CHECK_FUNCTION_SID, 0, 2) == "ZH"
-    error_message = "SCHEDULE_MANAGER_CHECK_FUNCTION_SID expected to start with \"ZH\"."
-  }
-}
-
-# END FEATURE: schedule-manager
-
-# FEATURE: callback-and-voicemail	
-variable "SERVERLESS_CALLBACK_FUNCTION_SID" {
-  type        = string
-  description = "create callback function sid"
-  validation {
-    condition     = length(var.SERVERLESS_CALLBACK_FUNCTION_SID) > 2 && substr(var.SERVERLESS_CALLBACK_FUNCTION_SID, 0, 2) == "ZH"
-    error_message = "SERVERLESS_CALLBACK_FUNCTION_SID expected to start with \"ZH\"."
-  }
-}
-# END FEATURE: callback-and-voicemail	
 
 
 

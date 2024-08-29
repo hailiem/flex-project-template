@@ -27,6 +27,7 @@ const SwitchToVideo: React.FunctionComponent<SwitchToVideoProps> = ({ task, conv
 
     try {
       const response = await ChatToVideoService.generateVideoCode(taskSid);
+      console.log(`generateVideoCode response: ${response}`);
 
       if (!response.roomName) {
         Notifications.showNotification(ChatToVideoNotification.FailedVideoLinkNotification);
