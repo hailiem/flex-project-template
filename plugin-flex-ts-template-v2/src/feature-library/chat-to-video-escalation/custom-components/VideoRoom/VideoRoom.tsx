@@ -17,12 +17,12 @@ const VideoRoom: React.FunctionComponent<VideoRoomProps> = ({ task }) => {
   const identity = Manager.getInstance().user.identity;
 
   useEffect(() => {
-    if (task?.attributes?.videoRoom && task.attributes.videoRoom !== activeRoom) {
-      roomJoined(task.attributes.videoRoom);
-    } else if (!task?.attributes?.videoRoom) {
+    if (task?.attributes?.RoomName && task.attributes.RoomName !== activeRoom) {
+      roomJoined(task.attributes.RoomName);
+    } else if (!task?.attributes?.RoomName) {
       alert(`Error joining video: the incoming task is invalid. Please send a new link to your client.`);
     }
-  }, [task.attributes.videoRoom]);
+  }, [task.attributes.RoomName]);
 
   function roomJoined(room: string) {
     logger.info(`[chat-to-video-escalation] room joined: ${room}`);

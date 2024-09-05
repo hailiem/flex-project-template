@@ -24,27 +24,32 @@ const SwitchToVideo: React.FunctionComponent<SwitchToVideoProps> = ({ task, conv
     setIsLoading(true);
 
     const { taskSid } = task;
+    let identity = 'Customer';
+    for (const key of conversation?.participants?.keys() as IterableIterator<string>) {
+      console.log(key);
+      if (key.startsWith('FX')) {
+        identity = key;
+      }
+    }
 
     try {
-      const response = await ChatToVideoService.generateVideoCode(taskSid);
-      console.log(`generateVideoCode response: ${response}`);
+      const response = await ChatToVideoService.generateVideoChannel(taskSid);
+      console.log(`FlexVideoChannel created: ${response.RoomName}`);
 
-      if (!response.roomName) {
+      if (!response.RoomName) {
         Notifications.showNotification(ChatToVideoNotification.FailedVideoLinkNotification);
         setIsLoading(false);
         return;
       }
 
-      const url = ChatToVideoService.generateUrl('Customer', response.roomName);
-      logger.info(`[chat-to-video-escalation] unique link created: ${url}`);
-
       await Actions.invokeAction('SendMessage', {
-        body: `${templates[StringTemplates.InviteMessage]()} ${url}`,
+        body: `${templates[StringTemplates.InviteMessage]()}`,
         conversation,
         messageAttributes: {
-          hasVideo: true,
-          videoUrl: url,
-          uniqueCode: response.roomName,
+          videoCallSettings: {
+            roomName: response.RoomName,
+            identity,
+          },
         },
       });
     } catch (error: any) {

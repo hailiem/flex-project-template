@@ -9,6 +9,6 @@ export const actionHook = function completeVideoRoom(flex: typeof Flex) {
   flex.Actions.addListener(`${actionEvent}${actionName}`, async (payload) => {
     if (!payload.task?.attributes?.videoRoomSid) return;
 
-    await ChatToVideoService.completeRoom(payload.task.attributes.videoRoomSid);
+    await ChatToVideoService.completeRoom(payload.task.attributes.flexInteractionChannelSid);
   });
 };
